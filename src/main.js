@@ -1,3 +1,9 @@
+//Sunny Han
+//Turkey Traffic
+//Approx hrs: 30 
+//Creative tilt:
+//Technical: Implemented mechanic where turkey snaps to each lane with a delay between each button press
+//Visual: Follows the story of a turkey on highway 17. It can also gobble by pressing G.
 let config = {
     type: Phaser.CANVAS,
     width: 800,
