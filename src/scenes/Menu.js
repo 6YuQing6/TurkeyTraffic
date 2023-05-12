@@ -48,9 +48,6 @@ class Menu extends Phaser.Scene {
           this.sound.play('selection');
           this.sound.play('gobble');
           this.bgm.stop();
-          game.settings = {
-            carSpeed: 3   
-          }
           this.scene.start('playScene');    
         }
       }
