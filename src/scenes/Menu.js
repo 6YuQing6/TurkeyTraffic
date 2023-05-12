@@ -11,9 +11,11 @@ class Menu extends Phaser.Scene {
         this.load.audio('jump', './assets/jump.wav');
         this.load.audio('bgm', './assets/bgm.mp3');
         this.load.audio('selection', './assets/selection.wav');
+        this.load.image('bkg1', './assets/Start.png');
     }
 
     create() {
+        this.add.image(0,0,'bkg1').setOrigin(0,0);
         this.cameras.main.setBackgroundColor('#a5d1b1');
         let menuConfig = {
             fontFamily: 'Courier',
@@ -32,9 +34,9 @@ class Menu extends Phaser.Scene {
         this.bgm.play();
 
         // show menu text 
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'TURKEY TRAFFIC', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Controls: W - UP  S - DOWN  G - GOBBLE', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press G to start', menuConfig).setOrigin(0.5);
+        //this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'TURKEY TRAFFIC', menuConfig).setOrigin(0.5);
+        //this.add.text(game.config.width/2, game.config.height/2, 'Controls: W - UP  S - DOWN  G - GOBBLE', menuConfig).setOrigin(0.5);
+        //this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press G to start', menuConfig).setOrigin(0.5);
         // define keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
