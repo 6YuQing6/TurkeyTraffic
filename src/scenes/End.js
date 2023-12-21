@@ -3,7 +3,7 @@ class End extends Phaser.Scene {
         super("endScene");
     }
     preload(){
-        this.load.image('end', './assets/End.png');
+        this.load.image('end', './assets/End1.png');
     }
     create(){
         this.bgm = this.sound.add('bgm', {volume: 0.8, loop: true});

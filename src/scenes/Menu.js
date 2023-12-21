@@ -48,9 +48,26 @@ class Menu extends Phaser.Scene {
         // show menu text 
         this.title = this.add.text(game.config.width/2, 188, 'Turkey Traffic', titleConfig).setOrigin(0.5);
         this.instructions = this.add.text(game.config.width/2, 276, 'Instructions', buttonConfig).setOrigin(0.5);
+        this.instructions.setInteractive();
         this.play = this.add.text(game.config.width/2, 308, 'Play', buttonConfig).setOrigin(0.5);
+        this.play.setInteractive();
         this.credits = this.add.text(game.config.width/2, 340, 'Credits', buttonConfig).setOrigin(0.5);
-        //this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press G to start', menuConfig).setOrigin(0.5);
+        this.credits.setInteractive();
+        
+        //interactive text UI
+        const menuOptions = [{text: this.instructions, scene: instructionScene}, {text: this.play, scene: playScene}, {text: this.credits, scene: creditScene}];
+        menuOptions.forEach((option) => {
+            option.text.on('pointerover', () => {
+                text.setFontStyle('bold');
+            });
+            option.text.on('pointerout', () => {
+                text.setFontStyle('normal');
+            });
+            option.text.on('pointerup', () => {
+                this.loadScene(option.scene);
+            });
+        }); 
+
         // define keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
