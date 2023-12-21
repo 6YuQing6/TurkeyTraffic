@@ -30,7 +30,7 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
         let titleConfig = {
-            fontFamily: 'Ariel',
+            fontFamily: 'Avenir',
             fontSize: '52px',
             color: '#000000',
             align: 'middle'
@@ -42,12 +42,14 @@ class Menu extends Phaser.Scene {
             align: 'middle'
         };
         //background music
-        this.bgm = this.sound.add('bgm', {volume: 0.5, loop: true});
+        this.bgm = this.sound.add('bgm', {volume: 0, loop: true});
         this.bgm.play();
 
         // show menu text 
         this.title = this.add.text(game.config.width/2, 188, 'Turkey Traffic', titleConfig).setOrigin(0.5);
-        this.instructions = this.add.text(game.config.width/2, game.config.height/2, 'Instructions', buttonConfig).setOrigin(0.5);
+        this.instructions = this.add.text(game.config.width/2, 276, 'Instructions', buttonConfig).setOrigin(0.5);
+        this.play = this.add.text(game.config.width/2, 308, 'Play', buttonConfig).setOrigin(0.5);
+        this.credits = this.add.text(game.config.width/2, 340, 'Credits', buttonConfig).setOrigin(0.5);
         //this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press G to start', menuConfig).setOrigin(0.5);
         // define keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
