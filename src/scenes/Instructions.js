@@ -6,22 +6,17 @@ class Instructions extends Phaser.Scene {
         this.load.image('instructions', './assets/Instructions.png');
     }
     create(){
-        this.bgm = this.sound.add('bgm', {volume: 0.8, loop: true});
+        this.bgm = this.sound.add('bgm', {volume: 0.5, loop: true});
         this.bgm.play();
-        this.end = this.add.tileSprite(0, 0, 800, 520, 'end').setOrigin(0, 0);
-        let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#FFFFFF',
-            color: '#000000',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-        
+        this.instructions = this.add.tileSprite(0, 0, 800, 520, 'instructions').setOrigin(0, 0);
+
+        //adding back button
+        this.back = this.add.text(638, 102, 'x', buttonConfig).setOrigin(0.5);
+        this.back.setInteractive();
+        this.back.on('pointerup', () => {
+            this.bgm.stop();
+            this.scene.start('menuScene');
+        });
     }
     update(){
     }

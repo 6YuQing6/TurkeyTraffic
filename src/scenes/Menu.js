@@ -17,32 +17,8 @@ class Menu extends Phaser.Scene {
     create() {
         this.add.image(0,0,'bkg1').setOrigin(0,0);
         this.cameras.main.setBackgroundColor('#a5d1b1');
-        let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#6cad7d',
-            color: '#FFFFFF',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 0
-        }
-        let titleConfig = {
-            fontFamily: 'Avenir',
-            fontSize: '52px',
-            color: '#000000',
-            align: 'middle'
-        };
-        let buttonConfig = {
-            fontFamily: 'Avenir',
-            fontSize: '25px',
-            color: '#000000',
-            align: 'middle'
-        };
         //background music
-        this.bgm = this.sound.add('bgm', {volume: 0, loop: true});
+        this.bgm = this.sound.add('bgm', {volume: 0.5, loop: true});
         this.bgm.play();
 
         // show menu text 
@@ -54,17 +30,27 @@ class Menu extends Phaser.Scene {
         this.credits = this.add.text(game.config.width/2, 340, 'Credits', buttonConfig).setOrigin(0.5);
         this.credits.setInteractive();
         
+        //highscore
+        this.highscore = this.add.text(game.config.width/2,392,'Highscore: '+highscore,buttonConfig).setOrigin(0.5);
+        
         //interactive text UI
-        const menuOptions = [{text: this.instructions, scene: instructionScene}, {text: this.play, scene: playScene}, {text: this.credits, scene: creditScene}];
+        const menuOptions = [
+            {text: this.instructions, scene: 'instructionScene'}, 
+            {text: this.play, scene: 'playScene'}, 
+            {text: this.credits, scene: 'creditScene'}
+        ];
         menuOptions.forEach((option) => {
             option.text.on('pointerover', () => {
-                text.setFontStyle('bold');
+                this.sound.play('selection');
+                option.text.setFontStyle('bold');
             });
             option.text.on('pointerout', () => {
-                text.setFontStyle('normal');
+                option.text.setFontStyle('normal');
             });
             option.text.on('pointerup', () => {
-                this.loadScene(option.scene);
+                this.sound.play('gobble');
+                this.bgm.stop();
+                this.scene.start(option.scene);
             });
         }); 
 

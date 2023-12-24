@@ -5,9 +5,9 @@ class Car extends Phaser.GameObjects.Sprite{
         this.moveSpeed = Phaser.Math.Between(minspeed,maxspeed);
     }
     update() {
-        //move spaceship left
+        //move car left
         this.x -= this.moveSpeed;
-        //console.log(this.x, this.y);
+
         //wrap around from left to right edge 
         if (this.x <= 0 - this.width) {
             this.reset();

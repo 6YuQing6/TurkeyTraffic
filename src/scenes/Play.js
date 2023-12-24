@@ -33,10 +33,12 @@ class Play extends Phaser.Scene {
         // define keys
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
+        keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         keyG = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G);
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 
-        this.p1Turkey = new Turkey(this, 85, 175, 'turkey').setOrigin(0.5, 0);
+        this.p1Turkey = new Turkey(this, 100, 175, 'turkey').setOrigin(0.5, 0);
         //this.physics.world.enable([this.p1Turkey, this.car01, this.car02, this.car03, this.car04]);
         // initialize score
         this.p1Score = 0;
@@ -62,6 +64,7 @@ class Play extends Phaser.Scene {
         }
         //displays score
         this.scoreLeft = this.add.text(borderUISize, borderUISize - 20, this.p1Score, scoreConfig);
+        
     }
 
 
@@ -80,32 +83,38 @@ class Play extends Phaser.Scene {
                 this.car04.updateMoveSpeed(this.maxspeed,this.minspeed);
                 this.prevScore = this.p1Score;
             }
-            this.car01.update();               // update spacecars (x3)
+            this.car01.update();               // update cars (x3)
             this.car02.update();
             this.car03.update();
             this.car04.update();
-            this.p1Turkey.update(keyUP,keyDOWN);
+            this.p1Turkey.update(keyUP,keyDOWN,keyLEFT,keyRIGHT);
             this.bkg.tilePositionX += 1;
         }
         // check collisions
         if(this.checkCollision(this.p1Turkey, this.car04)) {
             this.gameOver = true;
+            this.sound.play('hit');
         }
         if (this.checkCollision(this.p1Turkey, this.car03)) {
             this.gameOver = true;
+            this.sound.play('hit');
         }
         if (this.checkCollision(this.p1Turkey, this.car02)) {
             this.gameOver = true;
+            this.sound.play('hit');
         }
         if (this.checkCollision(this.p1Turkey, this.car01)) {
             this.gameOver = true;
+            this.sound.play('hit');
         }
-        // check key input for restart
+        // checks if game over
         if (this.gameOver) {
             //this.bgm.stop();
-            this.highway.stop();
-            this.sound.play('hit');
-            this.scene.start('endScene');
+            //this.scene.pause('playScene');
+            //this.time.delayedCall(2500, function(){
+                this.highway.stop();
+                this.scene.start('endScene',{score: this.p1Score});
+            //}, [], this);
         }
     }
     checkCollision(turkey, car) {
