@@ -9,6 +9,9 @@ let config = {
     autoCenter: true,
     width: 800,
     height: 520,
+    render: {
+      pixelArt: true
+    },
     scene: [ Menu, Play, End, Instructions, Credits ]
   }
   
